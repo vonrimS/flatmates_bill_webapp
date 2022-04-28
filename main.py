@@ -1,5 +1,5 @@
 from flask.views import MethodView
-from wtforms import Form
+from wtforms import Form, StringField, SubmitField
 from flask import Flask, render_template
 
 
@@ -12,13 +12,20 @@ class HomePage(MethodView):
 
 class BillFormPage(MethodView):
     def get(self):
-        return '<h1>I am the bill form page!</h1>'
+        bill_form = BillForm()
+        return render_template('bill_form_page.html', billform=bill_form)
 
 class ResultsPage(MethodView):
     pass
 
 class BillForm(Form):
-    pass
+    amount = StringField('Bill Amount: ')
+    period = StringField('Bill Period: ')
+    name1 = StringField('Name: ')
+    days_in_house1 = StringField('Days in the house: ')
+    name2 = StringField('Name: ')
+    days_in_house2 = StringField('Days in the house: ')
+    button = SubmitField('Calculate')
 
 
 #routing
